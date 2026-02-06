@@ -2,72 +2,69 @@ import React from 'react';
 
 const ExperienceSection = () => {
     const experiences = [
-                {
-            title: "Paid Machine Learning Engineering Research Assistant - Retrieval-Augmented Generation Chatbot for Polycystic Kidney Disease(PKD)",
-            company: " Brown University & University of Rhode Island, Dept. of Biotechnology",
-            duration: "July 2025 - Present",
-            description: `Built a retrieval-augmented generation (RAG) chatbot for Polycystic Kidney Disease patients using Python, Flutter, and OpenAI’s GPT-4o-mini
-\nProcessed 50+ medical research papers into embeddings, stored in a vector database, and integrated FAISS similarity search for accurate retrieval
-\nImplemented an async, multi-threaded backend to deliver responsive, medically grounded, and empathetic chatbot interactions
+        {
+            title: "Backend Intern",
+            company: "Sorcea",
+            duration: "Jan 2026 – PRESENT",
+            type: "Part time - Remote",
+            description: `Currently helping migrate from AWS DynamoDB architecture to Neo4j Graph database.
+\nBuilding a louvain clustering algorithm to build recommendation engine for product search.
 `,
-            technologies: ["RAGbot", "Vector Database", "Embeddings", "Python", "Computer Engineering", "Research"],
-            links: [{text: "View Team Pic", url: "https://drive.google.com/file/d/12YYPotxw6keX5WZ_UiXeQJXoCtjJKa7A/view?usp=sharing"},
-                {text: "View Architechture Slides", url: "https://docs.google.com/presentation/d/1htXXNUh-LC4aqZ4VRapKp-wmgP0AdSKHrW9jEtecFaQ/edit?usp=sharing"},
-                {text: "View Website", url: "https://polycystickidney.streamlit.app/"},
-                {text: "View Demo", url: "https://drive.google.com/file/d/1VBj4l25Kb0ZMVLsEGoC3mwSRuz583jer/view?usp=sharing"},
-                ]
+            technologies: ["Neo4j", "Cypher", "Python", "Machine Learning", "NoSQL"],
+            links: []
+        },
+        {
+            title: "Software + ML Engineer",
+            subtitle: "(Intern till Dec 2025, now part-time SWE)",
+            company: "Brown University & University of Rhode Island",
+            duration: "June 2025 – PRESENT",
+            type: "Part time - Remote",
+            description: `Architected a production-ready RAG system for PKD research using FastAPI and Docker, achieving a 2-3s baseline latency for standard queries via OpenAI text-embeddings-3-small.
+\nEngineered a Stepback Query Decomposition mode that improved retrieval context breadth with only a 500ms overhead, maintaining a highly responsive 3.5s average total response time.
+\nDeveloped a Chain-of-Thought (CoT) reasoning engine for complex queries, managing multi-step query decomposition and synthesis across 2-5 reasoning steps for high-depth academic analysis.
+\nOptimized infrastructure costs by deploying to GCP Cloud Run with auto-scaling (2 vCPUs, 2GB RAM), maintaining a 3s average request duration under active usage and implementing scale-to-zero logic.
+\nReduced system RAM overhead and eliminated re-computation latency by migrating from ephemeral FAISS to a Persistent ChromaDB architecture with 1536-dimension vector indices.
+`,
+            technologies: ["GCP", "Docker", "ChromaDB", "OpenAI API", "FastAPI", "Python", "RAG", "FAISS"],
+            links: []
         },
 
         {
-            title: "Computer Hardware Engineering Intern",
-            company: "University of Rhode Island, Dept. of Biotechnology",
-            duration: "July 2024 - Aug 2024",
-            description: "Conducted research, designed & built \"Neeru\", a smart water bottle accessory to combat dehydration. Presented research poster at MIT Conference (IEEE MIT URTC 2024).",
-            technologies: ["Research", "Hardware Design", "IEEE", "3D Printing", "Circuit Design", "Computer Engineering"],
-            links: [{text: "MIT URTC Certificate TBD", url: ""},
-                 {text: "View Internship Certificate", url: "https://drive.google.com/file/d/1T8w_yqsrmewrZ7hrsyDhMF3Wa412WJOp/view?usp=sharing"},
-                 {text: "View Project Slides", url: "https://docs.google.com/presentation/d/1d4w7iVDirMmx7pPqHRNf-CikE3qAvhLT_fWHHr1Umi4/edit?usp=sharing"}
-                ]
-        },
-        {
-            title: "Summer program: Application of AI in Finance Industry",
-            company: "University of California San Diego",
-            duration: "July 2024 - Aug 2024",
-            description: "Learnt & built applications for predictive modeling in finance, banking, wealth, asset mgmt., & fraud detection using AI Technology. Received 2.5 credits from University of California San Diego.",
-            technologies: ["AI", "Finance", "Predictive Modeling", "Python", "Fintech"],
-            links: [
-                { text: "View AI + Finance Certificate", url: "https://drive.google.com/file/d/1MCfo0x6IFty9Tu9joIqztdy9O2jQhwhj/view?usp=sharing" }
-            ]
-        },
-        {
-            title: "Machine Learning Engineering Internship",
-            company: "University of Rhode Island, Dept. of Biotechnology",
-            duration: "July 2023 - Aug 2023",
-            description: "Built an AI model (under guidance of a URI mentor) to detect activity types on a smartwatch, used in an ADHD study to track and predict the onset of ADHD in children aged 7-11.",
-            technologies: ["Python", "Machine Learning", "AI", "Data Analysis", "K-Means clustering algorithm"],
-            links: [
-                { text: "View Research Poster: Human Activity Recongnition 2023", url: "https://docs.google.com/presentation/d/1TiVOjGnX01dvvkBp6vhvQEVISsh5gKl-wf3O2QzNNOE/edit?usp=sharing" }
-            ]
-        },
-        {
-            title: "Software Engineering Internship",
-            company: "University of Rhode Island, Dept. of Biotechnology",
-            duration: "July 2022 - Aug 2022",
-            description: "Developed a CareWell App module, a clinical dashboard for a digital health platform for caregivers of dementia. Built Analytics Dashboard, analyzed requirements & design doc. Presented app demo to post-grad and hospital reps who were interested in the product.",
-            technologies: ["App Development", "Dashboard Design", "Healthcare Tech", "Analytics"],
-            links: [
-                { text: "View Carewell Clinical Dashboard Slides", url: "https://docs.google.com/presentation/d/1m3HWPYzw26zsX33V6mhjOto0HqQ3V6mgURk3KuZ2QvA/edit?usp=sharing" },
-                { text: "View Demo Video", url: "https://drive.google.com/file/d/1hceekMAfpG0NEkgR2XVunOQBtkqomm5r/view?usp=sharing" }
-            ]
-        },
-        {
-            title: "Sharon High School HelpDesk Internship",
-            company: "Sharon High School",
-            duration: "September 2021 - June 2024",
-            description: "Conducted research on neural networks. Co-managed printers and copiers for 2 years. Developed a school appointment system for shared laptops and iPads, implemented across 3 elementary schools.",
-            technologies: ["System Administration", "Neural Networks", "JavaScript", "Web Development"],
+            title: "Engineering Intern (Hardware)",
+            company: "University of Rhode Island, Biomedical Engineering",
+            duration: "June 2024 – Aug 2024",
+            location: "Kingston, RI",
+            description: `Led development of an IoT smart-bottle accessory; presented research at IEEE MIT URTC 2024.
+\nOwned end-to-end hardware lifecycle: CAD design, 3D prototyping, and haptic feedback telemetry integration.
+\nValidated product-market fit via international research with 92 participants, mapping requirements to hardware specs.
+`,
+            technologies: ["IoT", "Hardware Design", "IEEE", "3D Printing", "CAD"],
             links: []
-        }
+        },
+
+        {
+            title: "ML Research Intern",
+            company: "University of Rhode Island, Biomedical Engineering",
+            duration: "June 2023 – Aug 2023",
+            location: "Kingston, RI",
+            description: `Helped build a HAR model for ADHD detection, reaching 62% accuracy using noisy accelerometer/gyroscope data.
+\nHelped deploy K-NN and Clustering models to transform raw smartwatch data into actionable clinical activity insights.
+`,
+            technologies: ["Python", "Machine Learning", "K-NN", "Clustering"],
+            links: []
+        },
+        {
+            title: "Student Volunteer (Software Engineering)",
+            company: "University of Rhode Island, Biomedical Engineering",
+            duration: "June 2022 – Aug 2022",
+            location: "Kingston, RI",
+            description: `Built a Flutter analytics dashboard for real-time clinical monitoring and health data visualization.
+\nArchitected a data sync layer using Firebase/Google Sheets API, automating patient metric ingestion from distributed sources.
+`,
+            technologies: ["Flutter", "Firebase", "Google Sheets API"],
+            links: []
+        },
+
     ];
 
     return (

@@ -18,13 +18,7 @@ const Navigation = () => {
                         <a href="#projects" className="nav-link">Projects</a>
                     </li>
                     <li className="nav-item">
-                        <a href="https://www.mlmindz.com/" target = "_blank" className="nav-link">Blog</a>
-                    </li>
-                    <li className="nav-item">
                         <a href="#contact" className="nav-link">Contact</a>
-                    </li>
-                    <li className="nav-item">
-                        <a href="https://docs.google.com/document/d/1an3YKIkXW3Zxj6JQJyCINcNAgKr3JvLk/edit?usp=sharing&ouid=111697376633579726869&rtpof=true&sd=true" target = "_blank" className="nav-link">Resume</a>
                     </li>
                 </ul>
             </div>
