@@ -3,27 +3,36 @@ import React from 'react';
 const ExperienceSection = () => {
     const experiences = [
         {
-            title: "Backend Intern",
-            company: "Sorcea",
-            duration: "Jan 2026 – PRESENT",
-            type: "Part time - Remote",
-            description: `Currently helping migrate from AWS DynamoDB architecture to Neo4j Graph database.
-\nBuilding a louvain clustering algorithm to build recommendation engine for product search.
+            title: "Full Stack Developer (Contract)",
+            company: "Mitsubishi Electric",
+            duration: "Feb 2026 – May 2026",
+            type: "Part time - Remote (~10 hrs/week)",
+            description: `Reduced real-time logistics lookup latency by ~33% by building geospatial matching logic with H3 hexagonal indexing to cluster drivers and packages into nearby regions.
+\nBuilt backend logic to match packages with nearby drivers using location updates every 10-30 seconds, enabling reliable real-time dispatch.
+\nShipped a QR code scanning feature in React Native, streamlining package handling workflows for field users.
 `,
-            technologies: ["Neo4j", "Cypher", "Python", "Machine Learning", "NoSQL"],
+            technologies: ["H3", "Python", "FastAPI", "PostgreSQL", "Valkey", "React Native", "AWS"],
             links: []
         },
         {
-            title: "Software + ML Engineer",
-            subtitle: "(Intern till Dec 2025, now part-time SWE)",
+            title: "Backend Intern",
+            company: "Sorcea",
+            duration: "Jan 2026 – May 2026",
+            type: "Part time - Remote (~10 hrs/week)",
+            description: `Migrated 100K+ product records from DynamoDB to Neo4j to better model relationships across products, ingredients, categories, and subcategories.
+\nBuilt a recommendation pipeline using TF-IDF similarity, cosine scoring, top-K sparsification, and Leiden community detection, improving product clustering quality across 100K+ items.
+\nDeployed the pipeline via AWS SageMaker, EC2 and S3, achieving under 100ms product retrieval for 3,000+ monthly users of a beauty marketing app.
+`,
+            technologies: ["Neo4j", "Python", "Machine Learning", "AWS SageMaker", "EC2", "Event Bridge", "Lambda", "S3"],
+            links: []
+        },
+        {
+            title: "Software Engineer",
             company: "Brown University & University of Rhode Island",
-            duration: "June 2025 – PRESENT",
+            duration: "June 2025 – Dec 2025",
             type: "Part time - Remote",
-            description: `Architected a production-ready RAG system for PKD research using FastAPI and Docker, achieving a 2-3s baseline latency for standard queries via OpenAI text-embeddings-3-small.
-\nEngineered a Stepback Query Decomposition mode that improved retrieval context breadth with only a 500ms overhead, maintaining a highly responsive 3.5s average total response time.
-\nDeveloped a Chain-of-Thought (CoT) reasoning engine for complex queries, managing multi-step query decomposition and synthesis across 2-5 reasoning steps for high-depth academic analysis.
-\nOptimized infrastructure costs by deploying to GCP Cloud Run with auto-scaling (2 vCPUs, 2GB RAM), maintaining a 3s average request duration under active usage and implementing scale-to-zero logic.
-\nReduced system RAM overhead and eliminated re-computation latency by migrating from ephemeral FAISS to a Persistent ChromaDB architecture with 1536-dimension vector indices.
+            description: `Built a full-stack PKD research platform on GCP Cloud Run (auto-scaling, scale-to-zero) featuring a multi-agent RAG pipeline with step-back query decomposition, question rewriting, and Chain-of-Thought reasoning over 81 research papers with 1536-dimensional embeddings and 3 retrieval modes — directly supporting $50K in secured research funding.
+\nDesigned and deployed a scalable document ingestion system using FastAPI, Docker, ChromaDB, and FAISS to convert scientific PDFs into a low-latency searchable RAG corpus.
 `,
             technologies: ["GCP", "Docker", "ChromaDB", "OpenAI API", "FastAPI", "Python", "RAG", "FAISS"],
             links: []
@@ -47,7 +56,7 @@ const ExperienceSection = () => {
             company: "University of Rhode Island, Biomedical Engineering",
             duration: "June 2023 – Aug 2023",
             location: "Kingston, RI",
-            description: `Helped build a HAR model for ADHD detection, reaching 62% accuracy using noisy accelerometer/gyroscope data.
+            description: `Helped build a HAR model for ADHD detection, reaching 72% accuracy using noisy accelerometer/gyroscope data.
 \nHelped deploy K-NN and Clustering models to transform raw smartwatch data into actionable clinical activity insights.
 `,
             technologies: ["Python", "Machine Learning", "K-NN", "Clustering"],
