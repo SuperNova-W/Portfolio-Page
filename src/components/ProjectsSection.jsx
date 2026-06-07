@@ -12,6 +12,7 @@ const projects = [
   {
     title: "Lendr",
     description: "A location-based peer-to-peer item lending marketplace — Airbnb for physical items between neighbors. Users list things they own, nearby users browse and request to borrow them via PostGIS geo-queries, and owners approve or decline. Features Google OAuth2 + JWT auth, S3 photo uploads, map/list browsing with radius filters, and two-way thumbs-up/down ratings tied to completed lends.",
+    liveLink: "https://lentit.netlify.app/",
     repoLink: "https://github.com/SuperNova-W/Lendr-2.0",
     technologies: ["React", "TypeScript", "Tailwind", "Node.js", "Express", "PostgreSQL", "PostGIS", "AWS"]
   },
