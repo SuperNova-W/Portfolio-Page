@@ -13,6 +13,7 @@
 
 
 .hero-content {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 40px;
@@ -24,6 +25,7 @@
 
 
 .hero-text {
+    width: min(100%, 900px);
     padding: 4rem 3rem 3rem 3rem;
     background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(24px);
@@ -71,6 +73,7 @@
     margin-bottom: 1rem;
     line-height: 1.2;
     color: #00171f;
+    overflow-wrap: anywhere;
 }
 
 .highlight {
@@ -92,6 +95,7 @@
     font-weight: 400;
     margin-bottom: 1.5rem;
     color: #007ea7;
+    overflow-wrap: anywhere;
 }
 
 .hero-description {
@@ -99,6 +103,7 @@
     margin-bottom: 2.5rem;
     color: #003459;
     line-height: 1.7;
+    overflow-wrap: anywhere;
 }
 
 .hero-buttons {

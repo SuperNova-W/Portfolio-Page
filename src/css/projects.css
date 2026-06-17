@@ -43,6 +43,20 @@
   box-shadow: 0 16px 40px rgba(0, 23, 31, 0.18), 0 4px 14px rgba(0, 0, 0, 0.1);
 }
 
+.project-eyebrow {
+  display: inline-flex;
+  margin-bottom: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  color: #006a8e;
+  background: rgba(0, 168, 232, 0.1);
+  font-size: 0.72rem;
+  line-height: 1;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
 .project-card h3 {
   margin: 0 0 0.9rem 0;
   font-size: 1.35rem;

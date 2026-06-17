@@ -11,6 +11,7 @@ import TechnologiesAndSkillsSection from '../components/TechnologiesAndSkillsSec
 import ExperienceSection from '../components/ExperienceSection';
 import ContactSection from '../components/ContactSection';
 import ProjectsSection from '../components/ProjectsSection';
+import CertificationsSection from '../components/CertificationsSection';
 import Footer from '../components/Footer';
 
 function Home() {
@@ -23,6 +24,7 @@ function Home() {
             <TechnologiesAndSkillsSection />
             <ExperienceSection />
             <ProjectsSection />
+            <CertificationsSection />
             <ContactSection />
             <Footer />
         </div>
