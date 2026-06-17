@@ -16,7 +16,7 @@
 
 .projects-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   align-items: stretch;
   margin: 0 auto;
@@ -25,41 +25,46 @@
 }
 
 .project-card {
-  background: rgba(255, 255, 255, 0.92);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(247, 252, 254, 0.9));
   backdrop-filter: blur(18px);
-  border: 1px solid rgba(0, 23, 31, 0.08);
-  border-radius: 22px;
-  box-shadow: 0 8px 32px rgba(0, 23, 31, 0.13), 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 126, 167, 0.14);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 23, 31, 0.1), 0 2px 10px rgba(0, 0, 0, 0.06);
   padding: 2rem;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, #00a8e8, #007ea7, #003459);
 }
 
 .project-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 40px rgba(0, 23, 31, 0.18), 0 4px 14px rgba(0, 0, 0, 0.1);
+  transform: translateY(-6px);
+  border-color: rgba(0, 168, 232, 0.28);
+  box-shadow: 0 18px 42px rgba(0, 23, 31, 0.15), 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
-.project-eyebrow {
-  display: inline-flex;
-  margin-bottom: 0.75rem;
-  padding: 0.25rem 0.65rem;
-  border-radius: 999px;
-  color: #006a8e;
-  background: rgba(0, 168, 232, 0.1);
-  font-size: 0.72rem;
-  line-height: 1;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0;
+.project-card-header {
+  width: 100%;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 126, 167, 0.12);
 }
 
 .project-card h3 {
-  margin: 0 0 0.9rem 0;
-  font-size: 1.35rem;
+  margin: 0 0 0.4rem 0;
+  font-size: 1.45rem;
+  line-height: 1.2;
   font-weight: 700;
   background: linear-gradient(45deg, #00a8e8, #007ea7, #003459);
   background-clip: text;
@@ -67,40 +72,46 @@
   -webkit-text-fill-color: transparent;
 }
 
-.project-card p {
+.project-subtitle {
+  margin: 0;
+  color: #53656d;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  font-weight: 650;
+}
+
+.project-description {
   margin: 0;
   font-size: 0.95rem;
   line-height: 1.6;
   color: #33454d;
-}
-
-/* Description grows to fill, pushing tags + link to a consistent bottom */
-.project-card p {
   flex: 1 1 auto;
 }
 
 .project-technologies {
-  margin: 1.5rem 0;
+  margin: 1.4rem 0 1.6rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
 .tech-button {
-  background: linear-gradient(45deg, #00a8e8, #007ea7);
-  color: #fff;
-  border: none;
+  background: rgba(0, 168, 232, 0.08);
+  color: #006a8e;
+  border: 1px solid rgba(0, 126, 167, 0.14);
   border-radius: 30px;
-  padding: 0.3rem 0.9rem;
+  padding: 0.34rem 0.78rem;
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 650;
   cursor: default;
-  box-shadow: 0 2px 10px rgba(0, 168, 232, 0.13);
-  transition: box-shadow 0.2s;
+  box-shadow: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .tech-button:hover {
-  box-shadow: 0 6px 18px rgba(0, 168, 232, 0.22);
+  background: rgba(0, 168, 232, 0.14);
+  border-color: rgba(0, 126, 167, 0.22);
+  color: #003459;
 }
 
 .project-links {
@@ -119,7 +130,7 @@
   text-decoration: none;
   font-weight: 600;
   font-size: 0.95rem;
-  border-radius: 30px;
+  border-radius: 12px;
   padding: 0.6rem 1.2rem;
   background: linear-gradient(45deg, #00a8e8, #007ea7);
   box-shadow: 0 2px 10px rgba(0, 168, 232, 0.13);
@@ -133,7 +144,7 @@
 
 /* Secondary "View Repo" button — outlined to differentiate from the primary */
 .project-card a.project-link-secondary {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.72);
   color: #007ea7;
   border: 1.5px solid #00a8e8;
   box-shadow: none;
@@ -143,4 +154,23 @@
   background: rgba(0, 168, 232, 0.1);
   color: #006a8e;
   box-shadow: 0 4px 14px rgba(0, 168, 232, 0.18);
+}
+
+@media screen and (max-width: 480px) {
+  .projects-list {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+
+  .project-card {
+    padding: 1.4rem;
+  }
+
+  .project-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .project-links {
+    flex-direction: column;
+  }
 }

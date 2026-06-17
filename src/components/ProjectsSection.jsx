@@ -4,7 +4,7 @@ import "../css/projects.css";
 const projects = [
   {
     title: "HandShook",
-    eyebrow: "AI-Assisted Handshake Job Application Automation",
+    subtitle: "AI-assisted Handshake job application automation",
     description: "Built a Chrome MV3 extension with React and TypeScript to automate eligible Handshake applications, backed by a Spring Boot service for persistence and user management. Added duplicate prevention, audit logging, and OpenAI-powered document generation while keeping the application flow privacy-conscious and transparent.",
     liveLink: "https://handshook.netlify.app/",
     repoLink: "https://github.com/SuperNova-W/HandshakeJobApplier",
@@ -12,7 +12,7 @@ const projects = [
   },
   {
     title: "Lendr",
-    eyebrow: "Location-Based Peer-to-Peer Item Lending Marketplace",
+    subtitle: "Location-based peer-to-peer item lending marketplace",
     description: "Built a full-stack lending marketplace with a 24-endpoint TypeScript/Express API on AWS Lambda and an Expo/React Native client for iOS, Android, and web. Implemented PostGIS discovery, Supabase-backed JWT APIs, transactional workflows, and role-based authorization for secure peer-to-peer lending.",
     liveLink: "https://lentit.netlify.app/",
     repoLink: "https://github.com/SuperNova-W/Lendr-2.0",
@@ -20,14 +20,14 @@ const projects = [
   },
   {
     title: "College Tracker App",
-    eyebrow: "College Planning Dashboard",
+    subtitle: "College planning dashboard",
     description: "Built a student-focused web app for tracking colleges, deadlines, costs, facts, and supplemental prompts in one place. The experience centers around a visual deadline timeline so application planning stays easy to scan.",
     repoLink: "https://github.com/SuperNova-W/CollegeTracker",
     technologies: ["React", "Vite", "CSS", "Supabase"]
   },
   {
     title: "Portfolio Page",
-    eyebrow: "Personal Portfolio",
+    subtitle: "Personal portfolio",
     description: "Designed and built a responsive portfolio site to showcase experience, selected projects, certifications, and technical skills with a polished React interface.",
     liveLink: "https://yashwantponnaganti.netlify.app",
     repoLink: "https://github.com/yashwant-creator/PortfolioPage",
@@ -41,10 +41,12 @@ const ProjectsSection = () => {
       <h2>Projects</h2>
       <div className="projects-list">
         {projects.map((project, idx) => (
-          <div className="project-card" key={idx}>
-            <span className="project-eyebrow">{project.eyebrow}</span>
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
+          <article className="project-card" key={idx}>
+            <div className="project-card-header">
+              <h3>{project.title}</h3>
+              <p className="project-subtitle">{project.subtitle}</p>
+            </div>
+            <p className="project-description">{project.description}</p>
             <div className="project-technologies">
               {project.technologies.map((tech, tIdx) => (
                 <span className="tech-button" key={tIdx}>{tech}</span>
@@ -65,7 +67,7 @@ const ProjectsSection = () => {
                 </a>
               )}
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </section>
