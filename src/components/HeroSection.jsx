@@ -19,7 +19,7 @@ const HeroSection = () => {
                     </h1>
                     <h2 className="hero-subtitle">Computer Science freshman looking for entry-level experience in end-to-end AIML, web, and mobile development</h2>
                     <p className="hero-description">
-                        UMD | BS in Computer Science: ML & Applied Mathematics | Expected May 2028 |
+                        UMD | BS in Computer Science: ML & Applied Mathematics |
                         Presidential Scholarship Recipient, Dean's List, FIRE
                     </p>
                     <div className="hero-buttons">

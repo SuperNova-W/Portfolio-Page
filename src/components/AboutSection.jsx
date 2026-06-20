@@ -9,7 +9,7 @@ const AboutSection = () => {
                     <div className="about-text">
                         <p>
                             University of Maryland, College Park |
-                            BS in Computer Science: ML & Applied Mathematics | Expected May 2028 |
+                            BS in Computer Science: ML & Applied Mathematics |
                             Presidential Scholarship Recipient, Dean's List, FIRE
                         </p>
                         <p>
