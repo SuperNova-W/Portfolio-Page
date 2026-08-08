@@ -1,38 +1,35 @@
 import React from 'react';
+import Section from './Section';
+import Typer from './Typer';
+
+const contacts = [
+    { label: 'Email', text: 'yash.ponnaganti@gmail.com', href: 'mailto:yash.ponnaganti@gmail.com' },
+    {
+        label: 'LinkedIn',
+        text: 'linkedin.com/in/yashwant-ponnaganti',
+        href: 'https://www.linkedin.com/in/yashwant-ponnaganti/',
+    },
+    { label: 'GitHub', text: 'github.com/SuperNova-W', href: 'https://github.com/SuperNova-W' },
+];
 
 const ContactSection = () => {
     return (
-        <section id="contact" className="contact">
-            <div className="container">
-                <h2 className="section-title">Get In Touch</h2>
-                <div className="contact-content">
-                    <div className="contact-text">
-                        <p>
-                            I'm always open to discussing new opportunities and interesting projects. 
-                            Feel free to reach out if you'd like to work together!
-                        </p>
-                    </div>
-                    <div className="contact-info">
-                        <div className="contact-item">
-                            <strong>Email:</strong>
-                            <a href="mailto:yash.ponnaganti@gmail.com">yash.ponnaganti@gmail.com</a>
-                        </div>
-                        <div className="contact-item">
-                            <strong>LinkedIn:</strong>
-                            <a href="https://www.linkedin.com/in/yashwant-ponnaganti/" target="_blank" rel="noopener noreferrer">
-                                linkedin.com/in/yashwant-ponnaganti
-                            </a>
-                        </div>
-                        <div className="contact-item">
-                            <strong>GitHub:</strong>
-                            <a href="https://github.com/yashwant-creator" target="_blank" rel="noopener noreferrer">
-                                github.com/yashwant-creator
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <Section id="contact" title="Contact">
+            <ul className="contact-list">
+                {contacts.map((contact, index) => (
+                    <li key={contact.label}>
+                        <span className="label">
+                            <Typer text={contact.label} delay={120 + index * 80} />
+                        </span>
+                        <a className="link" href={contact.href} target="_blank" rel="noopener noreferrer">
+                            <span className="title">
+                                <Typer text={contact.text} delay={160 + index * 80} />
+                            </span>
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </Section>
     );
 };
 
