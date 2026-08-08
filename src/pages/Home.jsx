@@ -1,31 +1,32 @@
-
 import React from 'react';
 import '../css/main.css';
 
-// Import components
-import CursorSpotlight from '../components/CursorSpotlight';
-import BackgroundBlobs from '../components/BackgroundBlobs';
 import Navigation from '../components/Navigation';
+import Section from '../components/Section';
 import HeroSection from '../components/HeroSection';
-import TechnologiesAndSkillsSection from '../components/TechnologiesAndSkillsSection';
 import ExperienceSection from '../components/ExperienceSection';
-import ContactSection from '../components/ContactSection';
 import ProjectsSection from '../components/ProjectsSection';
+import PublicationsSection from '../components/PublicationsSection';
 import CertificationsSection from '../components/CertificationsSection';
+import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 
 function Home() {
     return (
-        <div className="home">
-            <CursorSpotlight />
-            <BackgroundBlobs />
+        <div className="app">
             <Navigation />
-            <HeroSection />
-            <TechnologiesAndSkillsSection />
-            <ExperienceSection />
-            <ProjectsSection />
-            <CertificationsSection />
-            <ContactSection />
+            <div className="container">
+                <div className="wrapper">
+                    <Section id="about" title="About">
+                        <HeroSection />
+                    </Section>
+                    <ExperienceSection />
+                    <ProjectsSection />
+                    <PublicationsSection />
+                    <CertificationsSection />
+                    <ContactSection />
+                </div>
+            </div>
             <Footer />
         </div>
     );

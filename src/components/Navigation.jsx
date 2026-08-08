@@ -1,31 +1,32 @@
 import React from 'react';
+import Typer from './Typer';
+
+const links = [
+    { href: '#about', label: 'About' },
+    { href: '#experience', label: 'Experience' },
+    { href: '#projects', label: 'Projects' },
+    { href: '#publications', label: 'Publications' },
+    { href: '#awards', label: 'Awards' },
+    { href: '#contact', label: 'Contact' },
+];
 
 const Navigation = () => {
     return (
-        <nav className="navbar">
-            <div className="nav-container">
-                <ul className="nav-menu">
-                    <li className="nav-item">
-                        <a href="#home" className="nav-link">Home</a>
-                    </li>
-                    <li className="nav-item">
-                        <a href="#skills" className="nav-link">Skills</a>
-                    </li>
-                    <li className="nav-item">
-                        <a href="#experience" className="nav-link">Experience</a>
-                    </li>
-                    <li className="nav-item">
-                        <a href="#projects" className="nav-link">Projects</a>
-                    </li>
-                    <li className="nav-item">
-                        <a href="#certifications" className="nav-link">Certifications</a>
-                    </li>
-                    <li className="nav-item">
-                        <a href="#contact" className="nav-link">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <header className="header">
+            <svg className="logo" viewBox="0 0 32 32" aria-label="YP">
+                <path d="M4 7 L11 17 L18 7" />
+                <path d="M11 17 L11 25" />
+            </svg>
+            <nav className="header-nav">
+                {links.map((link, index) => (
+                    <a className="link" key={link.href} href={link.href}>
+                        <span className="title">
+                            <Typer text={link.label} delay={600 + index * 90} maxDuration={300} />
+                        </span>
+                    </a>
+                ))}
+            </nav>
+        </header>
     );
 };
 
