@@ -445,6 +445,42 @@ body {
     padding-left: 28px;
 }
 
+.list .note.award {
+    font-size: 11px;
+    margin-top: 2px;
+    margin-bottom: 4px;
+    letter-spacing: 0.04em;
+}
+
+.skill-row {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+}
+
+.skill-row:last-child {
+    margin-bottom: 0;
+}
+
+.skill-row .label {
+    flex: 0 0 150px;
+    font-size: 11px;
+    padding-top: 3px;
+}
+
+@media screen and (max-width: 719px) {
+    .skill-row {
+        display: block;
+    }
+
+    .skill-row .label {
+        display: block;
+        margin-bottom: 2px;
+    }
+}
+
 .list .tech {
     font-size: 11px;
     opacity: 1;

@@ -3,13 +3,15 @@ import Section from './Section';
 import Typer from './Typer';
 
 const certifications = [
-    { title: 'ASME ISHOW Finalist — NeoTex', issuer: '$10K pre-seed + accelerator' },
+    { title: 'ASME ISHOW Global Accelerator Finalist — NeoTex', issuer: '$10K pre-seed grant' },
     { title: 'AWS Certified Cloud Practitioner', issuer: 'AWS' },
     { title: 'AWS Certified Developer – Associate', issuer: 'AWS' },
     { title: '5x Hackathon Winner', issuer: 'See below' },
     { title: 'Presidential Scholarship', issuer: 'UMD' },
     { title: "Dean's List – All Semesters", issuer: 'UMD' },
     { title: 'FIRE Honors Program', issuer: 'UMD' },
+    { title: 'CS Honors Program', issuer: 'UMD' },
+    { title: '2x IEEE Publications', issuer: 'AIxMHC 2026 · MIT URTC 2026' },
 ];
 
 const hackathons = [

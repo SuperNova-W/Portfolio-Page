@@ -8,7 +8,7 @@ const SUMMARY =
     'Computer science student at the University of Maryland building production AI/ML systems — multi-agent RAG pipelines, real-time data infrastructure and cloud-native backends on AWS and GCP.';
 
 const CREDENTIALS =
-    "BS Computer Science (ML Track) & Applied Mathematics · Expected Spring 2028 · GPA 3.92 · FIRE Honors · Presidential Scholarship · Dean's List";
+    "BS Computer Science (Honors, ML Track) & Applied Mathematics · Expected Spring 2028 · GPA 3.92 · FIRE Honors · Presidential Scholarship · Dean's List · 5x Hackathon Winner · 2x IEEE Publications";
 
 const HeroSection = () => {
     const [done, setDone] = useState(false);

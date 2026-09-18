@@ -5,17 +5,19 @@ import Typer from './Typer';
 const projects = [
     {
         title: 'Arrakis — Real-Time Market Signal Platform',
+        award: '1st place — Ctrl-V Hackathon',
         description:
-            'Platform producing sector-specific ETF recommendations (buy, sell or hold) alongside a confidence level, achieving a 1.30 net Sharpe ratio after transaction costs. Uses C++ and Apache Kafka for real-time market data ingestion, handling 340K+ updates/sec at 42ms end-to-end latency, with live feeds over WebSocket via Boost::Beast and an ML pipeline combining FinBERT with price data to predict next-day direction using XGBoost.',
+            'Platform producing sector-specific ETF recommendations (buy, sell or hold) alongside a confidence level, achieving a 1.30 net Sharpe ratio after transaction costs. A C++20 Finnhub WebSocket to Kafka ingestion path (Boost.Beast) feeds a sector ETF signal engine sustaining 340K+ events/sec under synthetic load at 42ms p95 / 48ms p99, with duplicate and out-of-order trades handled through per-symbol watermarks, 5s lateness and 15-minute dedup, and an ML pipeline combining FinBERT with price data to predict next-day direction using XGBoost.',
         liveLink: 'https://arrakis-ten.vercel.app/',
-        technologies: ['C++', 'Apache Kafka', 'Boost::Beast', 'Docker', 'FinBERT', 'XGBoost'],
+        technologies: ['C++20', 'Apache Kafka', 'Boost.Beast', 'Docker', 'FinBERT', 'XGBoost'],
     },
     {
-        title: 'RoadLens — CNN Road-Damage Classification',
+        title: 'RoadLens — CNN Road-Damage Recognition',
+        award: '1st place — AgentVerse Hackathon · IEEE MIT URTC publication',
         description:
-            'End-to-end CNN classification model for longitudinal, transverse and alligator cracks plus potholes. Fine-tuned a 20.3M-parameter ImageNet-pretrained EfficientNetV2-S at 256×256 resolution to 93.6% validation accuracy, wrapped in a B2G road-maintenance platform.',
+            'Two-stage road-damage pipeline for longitudinal, transverse and alligator cracks plus potholes: a class-agnostic YOLO26n ensemble (640/960px, union NMS) localizes damage at 0.87 AP@0.50, and a fine-tuned EfficientNetV2-S classifies each crop at 0.93 macro F1, wrapped in a B2G road-maintenance platform. The accompanying IEEE MIT URTC study showed the model encoded country/domain cues it was never trained on.',
         liveLink: 'https://roadlens.vercel.app/',
-        technologies: ['Python', 'EfficientNetV2-S', 'CNN', 'Transfer Learning'],
+        technologies: ['Python', 'YOLO26n', 'EfficientNetV2-S', 'CNN', 'Transfer Learning'],
     },
     {
         title: 'HandShook',
@@ -72,6 +74,11 @@ const ProjectsSection = () => {
                                     </span>
                                 </a>
                             </div>
+                            {project.award && (
+                                <p className="note award">
+                                    <Typer text={project.award} delay={base + 40} />
+                                </p>
+                            )}
                             <p className="note">
                                 <Typer text={project.description} delay={base + 80} />
                             </p>
