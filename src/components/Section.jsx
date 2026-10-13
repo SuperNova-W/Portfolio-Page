@@ -15,6 +15,11 @@ const Section = ({ id, title, children }) => {
         const node = ref.current;
         if (!node) return undefined;
 
+        // On a phone 10% of a long section can be most of the screen, or more
+        // than fits on it at all, so cap what has to show at a fifth of the
+        // viewport.
+        const threshold = Math.min(0.1, (window.innerHeight * 0.2) / Math.max(node.offsetHeight, 1));
+
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -24,7 +29,7 @@ const Section = ({ id, title, children }) => {
                     }
                 });
             },
-            { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+            { threshold, rootMargin: '0px 0px -40px 0px' }
         );
 
         observer.observe(node);

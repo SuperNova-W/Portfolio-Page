@@ -19,6 +19,8 @@ body {
     background: var(--bg);
     overflow: hidden;
     height: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 #root {
@@ -235,15 +237,22 @@ body {
     opacity: 1;
     color: #fff;
     display: inline-block;
+    /* Room below the text for the underline, which would otherwise be clipped
+       away. The margin cancels the padding so nothing moves. */
+    padding-bottom: 2px;
+    margin-bottom: -2px;
 }
 
+/* The offset is the leading under the last line of text, which puts the line
+   just beneath the descenders whatever the line height. */
 .link .title::after {
     transition: all 0.5s var(--ease-back);
     transform: translate3d(calc(-100% - 8px), 0, 0);
     background: #262626;
     position: absolute;
     content: '';
-    bottom: -2px;
+    bottom: 0;
+    bottom: calc((1lh - 1.32em) / 2);
     height: 1px;
     width: 24px;
     left: 0;
@@ -253,7 +262,8 @@ body {
     opacity: 1;
 }
 
-.link:hover .title::after {
+.link:hover .title::after,
+.link:focus-visible .title::after {
     transition: all 0.275s var(--ease-out-quint);
     transform: none;
     background: #bfbfbf;
@@ -310,17 +320,6 @@ body {
     }
 }
 
-@media screen and (max-width: 519px) {
-    .intro {
-        gap: 16px;
-    }
-
-    .intro-photo {
-        height: 96px;
-        width: 96px;
-    }
-}
-
 .intro .greeting {
     font-size: 32px;
     line-height: 1.25;
@@ -355,9 +354,45 @@ body {
     }
 }
 
+/* Phones: photo beside the greeting, with the copy running full width beneath
+   it rather than squeezed into the column next to the photo. */
 @media screen and (max-width: 519px) {
+    .intro {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        gap: 16px;
+    }
+
+    .intro-body {
+        display: contents;
+    }
+
+    .intro-photo {
+        height: 80px;
+        width: 80px;
+    }
+
+    /* Two lines tall from the start, so typing onto the second line does not
+       nudge the greeting upwards. */
     .intro .greeting {
-        font-size: 21px;
+        font-size: 22px;
+        margin-bottom: 0;
+        min-height: 2.5em;
+    }
+
+    .intro p {
+        grid-column: 1 / -1;
+    }
+
+    .intro .meta {
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width: 359px) {
+    .intro .greeting {
+        font-size: 19px;
     }
 }
 
@@ -599,17 +634,260 @@ body {
     opacity: 1;
 }
 
-@media screen and (max-width: 719px) {
+/* Small screens: the page itself scrolls rather than an inner region, so the
+   browser's toolbars can collapse. The header pins to the top and the footer
+   closes the page instead of holding a fixed bar. The height query catches
+   phones held sideways. */
+@media screen and (max-width: 719px), screen and (max-height: 519px) {
+    html,
+    body {
+        overflow: visible;
+        height: auto;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 76px;
+    }
+
+    #root,
+    .app {
+        height: auto;
+    }
+
+    .app {
+        position: static;
+    }
+
+    .header {
+        position: sticky;
+        background: var(--bg);
+        height: 52px;
+        gap: 12px;
+    }
+
+    .logo {
+        flex: 0 0 auto;
+    }
+
+    /* Section links run off the right edge and scroll sideways, fading out at
+       either end. The padding keeps the first and last link clear of the fade. */
     .header-nav {
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 12px, #000 calc(100% - 24px), transparent);
+        mask-image: linear-gradient(to right, transparent, #000 12px, #000 calc(100% - 24px), transparent);
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+        overflow-x: auto;
+        margin-right: -16px;
+        padding: 0 16px 0 4px;
+        font-size: 13px;
+        gap: 0;
+    }
+
+    .header-nav::-webkit-scrollbar {
         display: none;
     }
 
+    .header-nav .link {
+        white-space: nowrap;
+        align-items: center;
+        padding: 0 8px;
+        flex: 0 0 auto;
+        display: flex;
+        height: 44px;
+    }
+
+    .container {
+        position: static;
+        overflow: visible;
+        display: block;
+    }
+
+    .wrapper {
+        padding-top: 0;
+        padding-bottom: 24px;
+    }
+
+    .footer {
+        position: static;
+        flex-wrap: wrap;
+        column-gap: 24px;
+        max-width: 720px;
+        padding: 0 16px 40px;
+        margin: 0 auto;
+        height: auto;
+    }
+
     .footer .status {
-        display: none;
+        white-space: normal;
+        line-height: 1.7;
+    }
+
+    .footer .social {
+        gap: 16px;
+    }
+
+    .footer .social a {
+        margin-left: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Narrow screens: a size up on the small type, and anything that sat side by
+   side stacks. */
+@media screen and (max-width: 719px) {
+    /* Inline, so the cursor trails the greeting when it wraps instead of
+       dropping onto a line of its own. */
+    .typer:not(.reserved) {
+        display: inline;
+    }
+
+    .section-title {
+        font-size: 11px;
     }
 
     .entry-head {
         flex-direction: column;
         gap: 2px;
+    }
+
+    .entry-role,
+    .list .line {
+        font-size: 15px;
+    }
+
+    .section,
+    .entry-org,
+    .entry li,
+    .list .note,
+    .skill-row,
+    .two-col li,
+    .contact-list,
+    .footer {
+        font-size: 14px;
+    }
+
+    .entry-date,
+    .entry-tech,
+    .list .note.award,
+    .list .tech,
+    .skill-row .label,
+    .two-col .issuer,
+    .contact-list .label {
+        font-size: 12px;
+    }
+
+    .entry-actions,
+    .list .actions {
+        font-size: 13px;
+    }
+
+    /* Keep the index beside a project title that wraps; the two share a line
+       height, so top-aligning them lines up their first baselines. */
+    .list .line {
+        line-height: 1.6;
+        margin-bottom: 4px;
+    }
+
+    .list .line .link {
+        align-items: flex-start;
+        vertical-align: top;
+        display: inline-flex;
+        max-width: 100%;
+    }
+
+    .list .line .index {
+        margin-right: 10px;
+        flex: 0 0 auto;
+    }
+
+    /* A wrapped award reads as one item rather than two loose lines, and the
+       gap before the issuer moves onto the title so an issuer that drops to
+       its own line starts flush left. */
+    .two-col li {
+        line-height: 1.6;
+        padding: 5px 0;
+    }
+
+    .two-col li > .typer {
+        margin-right: 8px;
+    }
+
+    .two-col .issuer {
+        margin-left: 0;
+    }
+
+    .contact-list li {
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .contact-list li:last-child {
+        margin-bottom: 0;
+    }
+
+    .contact-list .label {
+        line-height: 1.6;
+        display: block;
+    }
+
+    .contact-list .link {
+        overflow-wrap: anywhere;
+        vertical-align: top;
+        max-width: 100%;
+    }
+}
+
+/* Touch screens: finger-sized hit areas on the links. There is no hover to
+   reveal a link either, so in place of the wipe the links in the page body
+   carry a faint underline all the time. */
+@media (pointer: coarse) {
+    .link .title::after {
+        content: none;
+    }
+
+    .section .link .typer-live {
+        text-decoration-color: rgba(255, 255, 255, 0.4);
+        text-decoration-line: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 5px;
+    }
+
+    .section .link:active .typer-live {
+        text-decoration-color: #bfbfbf;
+    }
+
+    .header-nav .link {
+        align-items: center;
+        display: flex;
+        height: 44px;
+    }
+
+    .list .line .link {
+        padding: 8px 0;
+    }
+
+    .entry-actions,
+    .list .actions {
+        margin-top: 0;
+        gap: 4px;
+    }
+
+    .entry-actions .link,
+    .list .actions .link {
+        padding: 11px 20px 11px 0;
+    }
+
+    .contact-list .link {
+        padding: 6px 0;
+    }
+
+    .footer .social a {
+        padding: 10px 0;
     }
 }
