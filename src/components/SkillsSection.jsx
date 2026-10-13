@@ -20,6 +20,7 @@ const skills = [
             'scikit-learn',
             'Pandas',
             'NumPy',
+            'XGBoost',
         ],
     },
     {
@@ -35,6 +36,7 @@ const skills = [
             'Neo4j',
             'Redis',
             'Kafka',
+            'Dagster',
             'Prometheus',
             'Grafana',
             'Jira',

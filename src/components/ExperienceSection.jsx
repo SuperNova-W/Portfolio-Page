@@ -21,9 +21,9 @@ const experiences = [
         company: 'App Dev Club LLC @ UMD',
         duration: 'Jan 2026 – Present',
         points: [
-            'Secured 10+ partnerships with major companies, enabling key projects and events for 400+ members.',
             'Directed a 10-mentor ML Bootcamp for 30 students, teaching NLP and DNNs through hands-on model development.',
-            'Built an internal intelligence platform (Dagster, Docker, Nx) for the 400+ member org, using Git activity and internal surveys to flag stalling projects and surface future technical leaders.',
+            'Built an internal intelligence platform (Dagster, Docker, Nx) analyzing 1,500+ commits across 16 repos, using Git activity and internal surveys to flag stalling projects and surface future technical leaders.',
+            'Built a 3-node high-availability homelab with containerized services, CI/CD, monitoring, failover and 5-minute recovery.',
             'Led a 3-person team fixing critical auth, webhook and storage vulnerabilities for the club platform.',
             'Secured Gitea and S3 integrations, added regression tests and eliminated production dependency vulnerabilities.',
         ],
