@@ -1,4 +1,4 @@
-// Emails you when someone views the portfolio.
+// Emails you when someone views the portfolio: approximate city, time and timezone only.
 // Required Netlify env vars: RESEND_API_KEY, NOTIFY_EMAIL
 const BOT_RE = /bot|crawl|spider|slurp|preview|headless|lighthouse|facebookexternalhit|embedly|quora|whatsapp|telegram|discord|slack/i
 
@@ -11,37 +11,17 @@ export default async (req, context) => {
   let body = {}
   try { body = await req.json() } catch { /* ignore */ }
 
-  const ip = context.ip || 'unknown'
   const geo = context.geo || {}
-
-  // Network owner (ISP / company / university) — often tells you *who* is viewing
-  let net = {}
-  try {
-    const r = await fetch(`https://ipwho.is/${encodeURIComponent(ip)}`, { signal: AbortSignal.timeout(2500) })
-    const j = await r.json()
-    if (j.success) net = j.connection || {}
-  } catch { /* lookup is optional */ }
-
   const place = [geo.city, geo.subdivision?.name, geo.country?.name].filter(Boolean).join(', ') || 'Unknown location'
-  const org = net.org || net.isp || 'Unknown network'
-  const clip = (v, n = 300) => String(v ?? '').slice(0, n)
+  const timezone = String(body.timezone || geo.timezone || 'Unknown').slice(0, 60)
+  const time = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })
 
   const text = [
     `Someone viewed your portfolio.`,
     ``,
-    `Location:   ${place}`,
-    `Coords:     ${geo.latitude ?? '?'}, ${geo.longitude ?? '?'}  (approximate)`,
-    `Network:    ${org}${net.asn ? ` (AS${net.asn})` : ''}`,
-    `IP:         ${ip}`,
-    `Time:       ${new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })} ET`,
-    `Their TZ:   ${clip(body.timezone, 60) || geo.timezone || '?'}`,
-    ``,
-    `Page:       ${clip(body.path) || '/'}`,
-    `Referrer:   ${clip(body.referrer) || 'Direct / none'}`,
-    `Device:     ${clip(ua)}`,
-    `Screen:     ${clip(body.screen, 30) || '?'}   Language: ${clip(body.language, 30) || '?'}`,
-    ``,
-    `Map: https://www.google.com/maps?q=${geo.latitude},${geo.longitude}`,
+    `Location:  ${place}`,
+    `Time:      ${time} ET`,
+    `Timezone:  ${timezone}`,
   ].join('\n')
 
   const res = await fetch('https://api.resend.com/emails', {
@@ -53,7 +33,7 @@ export default async (req, context) => {
     body: JSON.stringify({
       from: process.env.NOTIFY_FROM || 'Portfolio Alerts <onboarding@resend.dev>',
       to: process.env.NOTIFY_EMAIL,
-      subject: `👀 Portfolio view: ${place} — ${org}`,
+      subject: `Portfolio view: ${place}`,
       text,
     }),
   })
