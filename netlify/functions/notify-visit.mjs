@@ -1,4 +1,4 @@
-// Emails you when someone views the portfolio: approximate city, time and timezone only.
+// Emails you when someone views the portfolio: approximate city, time, timezone and referring site.
 // Required Netlify env vars: RESEND_API_KEY, NOTIFY_EMAIL
 const BOT_RE = /bot|crawl|spider|slurp|preview|headless|lighthouse|facebookexternalhit|embedly|quora|whatsapp|telegram|discord|slack/i
 
@@ -16,12 +16,23 @@ export default async (req, context) => {
   const timezone = String(body.timezone || geo.timezone || 'Unknown').slice(0, 60)
   const time = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })
 
+  // Where they came from: the referring site, or a ?ref= tag on a link you shared
+  let source = 'Direct (typed URL, bookmark, or an app that hides it)'
+  try {
+    const host = new URL(String(body.referrer || '')).hostname.replace(/^www\./, '')
+    const self = new URL(req.url).hostname.replace(/^www\./, '')
+    if (host && host !== self) source = host
+  } catch { /* no referrer */ }
+  const tag = String(body.ref || '').slice(0, 60)
+  if (tag) source = `${tag} (via ?ref link)` + (source.startsWith('Direct') ? '' : `, from ${source}`)
+
   const text = [
     `Someone viewed your portfolio.`,
     ``,
     `Location:  ${place}`,
     `Time:      ${time} ET`,
     `Timezone:  ${timezone}`,
+    `Came from: ${source}`,
   ].join('\n')
 
   const res = await fetch('https://api.resend.com/emails', {
