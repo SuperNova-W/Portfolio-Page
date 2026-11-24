@@ -1,6 +1,7 @@
 import React from 'react';
 import Section from './Section';
-import Typer from './Typer';
+import { Reveal } from './Reveal';
+import { Card, DateTag } from './ui';
 
 const education = [
     {
@@ -17,36 +18,27 @@ const education = [
 
 const EducationSection = () => {
     return (
-        <Section id="education" title="Education">
-            {education.map((edu, index) => {
-                const base = 120 + index * 90;
-                const tail = base + 140 + edu.points.length * 70;
-
-                return (
-                    <div className="entry" key={`${edu.school}-${edu.duration}`}>
-                        <div className="entry-head">
-                            <div>
-                                <div className="entry-role">
-                                    <Typer text={edu.degree} delay={base} />
+        <Section id="education" title="Education" keyboard="aside">
+            <div className="mx-auto w-full max-w-4xl px-4 md:px-8">
+                {education.map((edu, index) => (
+                    <Reveal key={`${edu.school}-${edu.duration}`} delay={index * 0.1}>
+                        <Card className="p-6 md:p-8">
+                            <div className="flex flex-col justify-between gap-4 md:flex-row md:items-start">
+                                <div className="space-y-1">
+                                    <h3 className="font-display text-lg font-bold tracking-tight md:text-xl">{edu.degree}</h3>
+                                    <p className="text-base font-medium text-muted-foreground">{`${edu.school} — ${edu.location}`}</p>
                                 </div>
-                                <div className="entry-org">
-                                    <Typer text={`${edu.school} — ${edu.location}`} delay={base + 60} />
-                                </div>
+                                <DateTag>{edu.duration}</DateTag>
                             </div>
-                            <div className="entry-date">
-                                <Typer text={edu.duration} delay={base + 100} />
-                            </div>
-                        </div>
-                        <ul>
-                            {edu.points.map((point, pointIndex) => (
-                                <li key={point}>
-                                    <Typer text={point} delay={base + 140 + pointIndex * 70} />
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                );
-            })}
+                            <ul className="ml-4 mt-6 list-outside list-disc space-y-2 text-base leading-relaxed text-muted-foreground">
+                                {edu.points.map((point) => (
+                                    <li key={point}>{point}</li>
+                                ))}
+                            </ul>
+                        </Card>
+                    </Reveal>
+                ))}
+            </div>
         </Section>
     );
 };

@@ -1,9 +1,130 @@
-html,
-body {
-  margin: 0;
-  min-width: 320px;
-  background: #16191b;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+@import '@fontsource-variable/space-grotesk';
+@import '@fontsource/unbounded/500.css';
+@import '@fontsource/unbounded/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 222.2 84% 4.9%;
+        --foreground: 210 40% 98%;
+        --card: 222.2 84% 4.9%;
+        --card-foreground: 210 40% 98%;
+        --primary: 210 40% 98%;
+        --primary-foreground: 222 47% 11%;
+        --secondary: 217.2 32.6% 17.5%;
+        --secondary-foreground: 210 40% 98%;
+        --muted: 217.2 32.6% 17.5%;
+        --muted-foreground: 215 20.2% 65.1%;
+        --accent: 217.2 32.6% 17.5%;
+        --accent-foreground: 210 40% 98%;
+        --border: 217.2 32.6% 17.5%;
+        --input: 217.2 32.6% 17.5%;
+        --ring: 212 27% 84%;
+        --radius: 0.5rem;
+        color-scheme: dark;
+    }
+
+    * {
+        @apply border-border;
+    }
+
+    html {
+        font-weight: 500;
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
+    body {
+        @apply bg-background text-foreground font-sans antialiased;
+        min-width: 320px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: Unbounded, sans-serif;
+    }
+
+    ::selection {
+        background: hsl(var(--foreground));
+        color: hsl(var(--background));
+    }
+}
+
+@layer utilities {
+    /* Content sits above the fixed 3D canvas but lets the pointer through to it
+       everywhere except on actual text, links and cards. */
+    .canvas-overlay-mode {
+        pointer-events: none;
+    }
+
+    .canvas-overlay-mode a,
+    .canvas-overlay-mode button,
+    .canvas-overlay-mode p,
+    .canvas-overlay-mode h1,
+    .canvas-overlay-mode h2,
+    .canvas-overlay-mode h3,
+    .canvas-overlay-mode h4,
+    .canvas-overlay-mode li,
+    .canvas-overlay-mode span,
+    .canvas-overlay-mode svg,
+    .canvas-overlay-mode img,
+    .canvas-overlay-mode .pointer-events-auto {
+        pointer-events: auto;
+    }
+
+    .text-outline {
+        -webkit-text-stroke: 1px hsl(var(--foreground) / 0.35);
+    }
+}
+
+/* Preloader: curtain with a curved bottom edge that lifts off the page. */
+.preloader {
+    position: fixed;
+    inset-inline: 0;
+    height: 100dvh;
+    width: 100vw;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-inline: 60px;
+    padding-bottom: 30px;
+    z-index: 2000;
+    background-color: hsl(var(--background));
+}
+
+.preloader svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 300px);
+}
+
+.preloader path {
+    fill: hsl(var(--background));
+}
+
+.preloader p {
+    position: absolute;
+    z-index: 1;
+    color: hsl(var(--foreground));
+    font-size: 72px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
 }

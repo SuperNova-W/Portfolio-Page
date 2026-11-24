@@ -1,8 +1,12 @@
 import React from 'react';
 import Section from './Section';
-import Typer from './Typer';
+import { Reveal } from './Reveal';
+import { Card, TechList } from './ui';
+import { useSceneStatus } from '../lib/scene-health';
 
-const skills = [
+// Also drives the 3D keyboard (see data/keyboardSkills.js).
+// eslint-disable-next-line react-refresh/only-export-components
+export const skills = [
     {
         label: 'Languages',
         items: ['Python', 'Java', 'C', 'C++', 'Go', 'TypeScript', 'JavaScript', 'SQL', 'Rust', 'OCaml'],
@@ -50,22 +54,23 @@ const skills = [
 ];
 
 const SkillsSection = () => {
-    return (
-        <Section id="skills" title="Skills">
-            {skills.map((skill, index) => {
-                const base = 120 + index * 90;
+    const sceneStatus = useSceneStatus();
+    const keyboard = sceneStatus === 'ready';
 
-                return (
-                    <div className="skill-row" key={skill.label}>
-                        <span className="label">
-                            <Typer text={skill.label} delay={base} />
-                        </span>
-                        <span>
-                            <Typer text={skill.items.join(' / ')} delay={base + 60} />
-                        </span>
-                    </div>
-                );
-            })}
+    return (
+        <Section id="skills" title="Skills" keyboard="skills" headerClassName={keyboard ? 'sticky top-[70px] z-[1]' : undefined}>
+            {/* Room for the 3D keyboard, which settles centre-screen here. */}
+            {keyboard && <div aria-hidden="true" className="pointer-events-none h-[70vh] md:h-[110vh]" />}
+            <div data-keyboard="aside" className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-4 px-4 md:grid-cols-2 md:px-8">
+                {skills.map((skill, index) => (
+                    <Reveal key={skill.label} delay={(index % 2) * 0.08} className="flex">
+                        <Card className="w-full p-6">
+                            <h3 className="font-sans text-sm tracking-wide text-muted-foreground">{skill.label}</h3>
+                            <TechList items={skill.items} className="mt-4" />
+                        </Card>
+                    </Reveal>
+                ))}
+            </div>
         </Section>
     );
 };

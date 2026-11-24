@@ -1,6 +1,7 @@
 import React from 'react';
 import Section from './Section';
-import Typer from './Typer';
+import { Reveal } from './Reveal';
+import { Card } from './ui';
 
 const certifications = [
     { title: 'ASME ISHOW Global Accelerator Finalist — NeoTex', issuer: '$10K pre-seed grant' },
@@ -24,23 +25,32 @@ const hackathons = [
 
 const CertificationsSection = () => {
     return (
-        <Section id="awards" title="Awards">
-            <ul className="list two-col">
-                {certifications.map((certification, index) => (
-                    <li key={certification.title}>
-                        <Typer text={certification.title} delay={120 + index * 70} />
-                        <span className="issuer">
-                            <Typer text={certification.issuer} delay={160 + index * 70} />
-                        </span>
-                    </li>
-                ))}
-            </ul>
-            <p className="entry-tech hackathon-line">
-                <Typer
-                    text={`Hackathon wins — ${hackathons.join(' / ')}`}
-                    delay={120 + certifications.length * 70}
-                />
-            </p>
+        <Section id="awards" title="Awards" keyboard="aside">
+            <div className="mx-auto w-full max-w-5xl px-4 md:px-8">
+                <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {certifications.map((certification, index) => (
+                        <Reveal as="li" key={certification.title} delay={(index % 3) * 0.06} className="flex">
+                            <Card className="relative w-full overflow-hidden p-5">
+                                <span
+                                    aria-hidden="true"
+                                    className="pointer-events-none absolute -top-6 left-6 h-16 w-16 rounded-full bg-white/20 opacity-20 blur-2xl transition-opacity duration-300 group-hover:opacity-60"
+                                />
+                                <span className="relative block font-medium leading-snug text-foreground">{certification.title}</span>
+                                <span className="relative mt-2 block text-sm text-muted-foreground">
+                                    {certification.issuer}
+                                </span>
+                            </Card>
+                        </Reveal>
+                    ))}
+                </ul>
+                <Reveal>
+                    <Card className="mt-6 p-5">
+                        <p className="text-sm leading-relaxed text-muted-foreground">
+                            {`Hackathon wins — ${hackathons.join(' / ')}`}
+                        </p>
+                    </Card>
+                </Reveal>
+            </div>
         </Section>
     );
 };

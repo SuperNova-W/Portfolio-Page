@@ -1,6 +1,7 @@
 import React from 'react';
 import Section from './Section';
-import Typer from './Typer';
+import { Reveal } from './Reveal';
+import { Card, PillLink, TechList } from './ui';
 
 const projects = [
     {
@@ -54,56 +55,46 @@ const projects = [
 
 const ProjectsSection = () => {
     return (
-        <Section id="projects" title="Projects">
-            <ul className="list">
-                {projects.map((project, index) => {
-                    const base = 120 + index * 110;
-
-                    return (
-                        <li key={project.title}>
-                            <div className="line">
-                                <a
-                                    className="link"
-                                    href={project.liveLink || project.repoLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <span className="index">{String(index + 1).padStart(2, '0')}</span>
-                                    <span className="title">
-                                        <Typer text={project.title} delay={base} />
-                                    </span>
-                                </a>
-                            </div>
+        <Section id="projects" title="Projects" keyboard="projects">
+            <ul className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-4 px-4 md:grid-cols-2 lg:grid-cols-3">
+                {projects.map((project, index) => (
+                    <Reveal as="li" key={project.title} delay={(index % 3) * 0.08} className="flex">
+                        <Card className="relative flex w-full flex-col overflow-hidden p-6 ring-1 ring-white/5">
+                            <span
+                                aria-hidden="true"
+                                className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-white/10 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100"
+                            />
+                            <a
+                                href={project.liveLink || project.repoLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-baseline gap-3"
+                            >
+                                <span className="font-display text-sm text-muted-foreground">
+                                    {String(index + 1).padStart(2, '0')}
+                                </span>
+                                <h3 className="font-display text-lg font-bold leading-snug tracking-tight transition-colors group-hover:text-white">
+                                    {project.title}
+                                </h3>
+                            </a>
                             {project.award && (
-                                <p className="note award">
-                                    <Typer text={project.award} delay={base + 40} />
+                                <p className="mt-3 w-fit rounded-lg bg-primary px-2 py-0.5 text-xs text-primary-foreground">
+                                    {project.award}
                                 </p>
                             )}
-                            <p className="note">
-                                <Typer text={project.description} delay={base + 80} />
-                            </p>
-                            <p className="tech">
-                                <Typer text={project.technologies.join(' / ')} delay={base + 160} />
-                            </p>
-                            <div className="actions">
-                                {project.liveLink && (
-                                    <a className="link" href={project.liveLink} target="_blank" rel="noopener noreferrer">
-                                        <span className="title">
-                                            <Typer text="Live" delay={base + 220} />
-                                        </span>
-                                    </a>
-                                )}
+                            <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
+                            <TechList items={project.technologies} className="mt-5" />
+                            <div className="mt-6 flex flex-wrap gap-3">
+                                {project.liveLink && <PillLink href={project.liveLink}>Live</PillLink>}
                                 {project.repoLink && (
-                                    <a className="link" href={project.repoLink} target="_blank" rel="noopener noreferrer">
-                                        <span className="title">
-                                            <Typer text="Repository" delay={base + 260} />
-                                        </span>
-                                    </a>
+                                    <PillLink href={project.repoLink} variant="outline">
+                                        Repository
+                                    </PillLink>
                                 )}
                             </div>
-                        </li>
-                    );
-                })}
+                        </Card>
+                    </Reveal>
+                ))}
             </ul>
         </Section>
     );

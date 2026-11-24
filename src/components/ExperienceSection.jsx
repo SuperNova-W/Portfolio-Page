@@ -1,6 +1,7 @@
 import React from 'react';
 import Section from './Section';
-import Typer from './Typer';
+import { Reveal } from './Reveal';
+import { Card, DateTag, PillLink, TechList } from './ui';
 
 const experiences = [
     {
@@ -102,53 +103,34 @@ const experiences = [
 
 const ExperienceSection = () => {
     return (
-        <Section id="experience" title="Experience">
-            {experiences.map((exp, index) => {
-                const base = 120 + index * 90;
-                const tail = base + 140 + exp.points.length * 70;
-
-                return (
-                    <div className="entry" key={`${exp.company}-${exp.duration}`}>
-                        <div className="entry-head">
-                            <div>
-                                <div className="entry-role">
-                                    <Typer text={exp.title} delay={base} />
+        <Section id="experience" title="Experience" keyboard="aside">
+            <div className="relative mx-auto flex w-full max-w-4xl flex-col gap-8 px-4 md:gap-12 md:px-8">
+                <div className="absolute bottom-4 left-1/2 top-4 hidden w-px -translate-x-1/2 bg-border md:block" />
+                {experiences.map((exp, index) => (
+                    <Reveal key={`${exp.company}-${exp.duration}`} delay={Math.min(index, 3) * 0.05} className="relative">
+                        <Card className="p-6 md:p-8">
+                            <div className="flex flex-col justify-between gap-4 md:flex-row md:items-start">
+                                <div className="space-y-1">
+                                    <h3 className="font-display text-lg font-bold tracking-tight md:text-xl">{exp.title}</h3>
+                                    <p className="text-base font-medium text-muted-foreground">{exp.company}</p>
                                 </div>
-                                <div className="entry-org">
-                                    <Typer text={exp.company} delay={base + 60} />
+                                <DateTag>{exp.duration}</DateTag>
+                            </div>
+                            <ul className="ml-4 mt-6 list-outside list-disc space-y-2 text-base leading-relaxed text-muted-foreground">
+                                {exp.points.map((point) => (
+                                    <li key={point}>{point}</li>
+                                ))}
+                            </ul>
+                            <TechList items={exp.technologies} className="mt-6" />
+                            {exp.link && (
+                                <div className="mt-6">
+                                    <PillLink href={exp.link.url}>{exp.link.label}</PillLink>
                                 </div>
-                            </div>
-                            <div className="entry-date">
-                                <Typer text={exp.duration} delay={base + 100} />
-                            </div>
-                        </div>
-                        <ul>
-                            {exp.points.map((point, pointIndex) => (
-                                <li key={point}>
-                                    <Typer text={point} delay={base + 140 + pointIndex * 70} />
-                                </li>
-                            ))}
-                        </ul>
-                        <p className="entry-tech">
-                            <Typer text={exp.technologies.join(' / ')} delay={tail + 20} />
-                        </p>
-                        {exp.link && (
-                            <div className="actions entry-actions">
-                                <a
-                                    className="link"
-                                    href={exp.link.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <span className="title">
-                                        <Typer text={exp.link.label} delay={tail + 60} />
-                                    </span>
-                                </a>
-                            </div>
-                        )}
-                    </div>
-                );
-            })}
+                            )}
+                        </Card>
+                    </Reveal>
+                ))}
+            </div>
         </Section>
     );
 };

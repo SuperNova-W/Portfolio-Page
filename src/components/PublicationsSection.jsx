@@ -1,6 +1,7 @@
 import React from 'react';
 import Section from './Section';
-import Typer from './Typer';
+import { Reveal } from './Reveal';
+import { Card } from './ui';
 
 const publications = [
     {
@@ -34,49 +35,42 @@ const publications = [
 
 const PublicationsSection = () => {
     return (
-        <Section id="publications" title="Publications">
-            {publications.map((publication, index) => {
-                const base = 120 + index * 90;
-
-                return (
-                    <div className="entry" key={publication.title}>
-                        <div className="entry-head">
-                            <div>
-                                <div className="entry-role">
-                                    {publication.link ? (
-                                        <a
-                                            className="link"
-                                            href={publication.link}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            <span className="title">
-                                                <Typer text={publication.title} delay={base} />
-                                            </span>
-                                        </a>
-                                    ) : (
-                                        <Typer text={publication.title} delay={base} />
-                                    )}
+        <Section id="publications" title="Publications" keyboard="aside">
+            <div className="mx-auto flex w-full max-w-4xl flex-col gap-6 px-4 md:px-8">
+                {publications.map((publication, index) => (
+                    <Reveal key={publication.title} delay={index * 0.08}>
+                        <Card className="p-6 md:p-8">
+                            <div className="flex flex-col justify-between gap-4 md:flex-row md:items-start">
+                                <div className="space-y-2">
+                                    <h3 className="font-display text-base font-bold leading-snug tracking-tight md:text-lg">
+                                        {publication.link ? (
+                                            <a
+                                                className="underline decoration-white/20 underline-offset-4 transition-colors hover:decoration-white"
+                                                href={publication.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                {publication.title}
+                                            </a>
+                                        ) : (
+                                            publication.title
+                                        )}
+                                    </h3>
+                                    <p className="text-sm font-medium text-muted-foreground">
+                                        {`${publication.authors} — ${publication.venue}`}
+                                    </p>
                                 </div>
-                                <div className="entry-org">
-                                    <Typer
-                                        text={`${publication.authors} — ${publication.venue}`}
-                                        delay={base + 60}
-                                    />
-                                </div>
+                                <span className="w-fit shrink-0 rounded-full border border-border px-3 py-0.5 text-xs tracking-widest text-muted-foreground">
+                                    {publication.year}
+                                </span>
                             </div>
-                            <div className="entry-date">
-                                <Typer text={publication.year} delay={base + 100} />
-                            </div>
-                        </div>
-                        <ul>
-                            <li>
-                                <Typer text={publication.description} delay={base + 140} />
-                            </li>
-                        </ul>
-                    </div>
-                );
-            })}
+                            <ul className="mt-5">
+                                <li className="text-base leading-relaxed text-muted-foreground">{publication.description}</li>
+                            </ul>
+                        </Card>
+                    </Reveal>
+                ))}
+            </div>
         </Section>
     );
 };

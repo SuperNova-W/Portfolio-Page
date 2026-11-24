@@ -1,53 +1,37 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { RevealContext } from './RevealContext';
-import Typer from './Typer';
+import React, { useRef } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { BoxReveal } from './Reveal';
+import { cn } from '../lib/cn';
 
 /**
- * A titled section. The first time it scrolls into view it fades into place and
- * releases every Typer inside it to start typing. The title sits in the left
- * gutter on wide screens.
+ * A page section with a big display heading. It scales and fades in as it
+ * enters the viewport and back out as it leaves. `keyboard` tells the 3D
+ * keyboard which pose to take while this section is on screen.
  */
-const Section = ({ id, title, children }) => {
+const Section = ({ id, title, keyboard, className, headerClassName, children }) => {
+    const reduce = useReducedMotion();
     const ref = useRef(null);
-    const [visible, setVisible] = useState(false);
-
-    useEffect(() => {
-        const node = ref.current;
-        if (!node) return undefined;
-
-        // On a phone 10% of a long section can be most of the screen, or more
-        // than fits on it at all, so cap what has to show at a fifth of the
-        // viewport.
-        const threshold = Math.min(0.1, (window.innerHeight * 0.2) / Math.max(node.offsetHeight, 1));
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setVisible(true);
-                        observer.unobserve(entry.target);
-                    }
-                });
-            },
-            { threshold, rootMargin: '0px 0px -40px 0px' }
-        );
-
-        observer.observe(node);
-        return () => observer.disconnect();
-    }, []);
+    const { scrollYProgress: enter } = useScroll({ target: ref, offset: ['start end', 'start 0.55'] });
+    const { scrollYProgress: leave } = useScroll({ target: ref, offset: ['end 0.45', 'end start'] });
+    const opacityIn = useTransform(enter, [0, 1], [0, 1]);
+    const opacityOut = useTransform(leave, [0, 1], [1, 0]);
+    const scaleIn = useTransform(enter, [0, 1], [0.85, 1]);
+    const scaleOut = useTransform(leave, [0, 1], [1, 0.85]);
+    const opacity = useTransform(() => Math.min(opacityIn.get(), opacityOut.get()));
+    const scale = useTransform(() => Math.min(scaleIn.get(), scaleOut.get()));
 
     return (
-        <section
-            id={id}
-            ref={ref}
-            className={`section reveal${visible ? ' visible' : ''}`}
-        >
-            <RevealContext.Provider value={visible}>
-                <h2 className="section-title">
-                    <Typer text={title} speed={40} maxDuration={400} />
-                </h2>
+        <section id={id} ref={ref} data-keyboard={keyboard} className={cn('relative scroll-mt-20 py-20 md:py-28', className)}>
+            <motion.div style={reduce ? undefined : { opacity, scale }} className="h-full w-full">
+                {title && (
+                    <a href={`#${id}`} className={cn('mb-12 block md:mb-20', headerClassName)}>
+                        <BoxReveal width="100%">
+                            <h2 className="text-center text-4xl font-bold text-foreground md:text-7xl">{title}</h2>
+                        </BoxReveal>
+                    </a>
+                )}
                 {children}
-            </RevealContext.Provider>
+            </motion.div>
         </section>
     );
 };
