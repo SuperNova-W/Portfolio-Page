@@ -12,6 +12,10 @@ export function trackVisit() {
     method: 'POST',
     keepalive: true,
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ timezone: Intl.DateTimeFormat().resolvedOptions().timeZone }),
+    body: JSON.stringify({
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      referrer: document.referrer,
+      ref: new URLSearchParams(location.search).get('ref') || new URLSearchParams(location.search).get('utm_source') || '',
+    }),
   }).catch(() => {})
 }
