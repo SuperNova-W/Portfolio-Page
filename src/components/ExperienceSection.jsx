@@ -1,10 +1,14 @@
 import React from 'react';
 import Section from './Section';
 import { Reveal } from './Reveal';
-import { Card, DateTag, PillLink, TechList } from './ui';
+import { Link } from 'react-router-dom';
+import { Card, DateTag, TechList, ViewMore } from './ui';
 
-const experiences = [
+// eslint-disable-next-line react-refresh/only-export-components
+export const experiences = [
     {
+        slug: 'grantuity',
+        summary: 'Cut p95 database latency 94% and built a Go ingestion service pulling from 22 grant data sources.',
         title: 'Software Engineering Intern',
         company: 'Grantuity — centralized platform for grant discovery outreach',
         duration: 'May 2026 – Aug 2026',
@@ -18,6 +22,8 @@ const experiences = [
         technologies: ['Go', 'Python', 'PostgreSQL', 'pytest', 'GitHub Actions', 'Prometheus', 'Grafana'],
     },
     {
+        slug: 'app-dev-club',
+        summary: 'Run a 30-student ML bootcamp and built internal tooling, a homelab and security fixes for the club platform.',
         title: 'Executive Board Member & Director of Bootcamp',
         company: 'App Dev Club LLC @ UMD',
         duration: 'Jan 2026 – Present',
@@ -32,6 +38,8 @@ const experiences = [
         link: { label: 'See demo', url: 'https://appdevclub.com/' },
     },
     {
+        slug: 'mitsubishi-electric',
+        summary: 'Shipped a package-return scheduling app and cut driver-matching latency 31% with geospatial indexing.',
         title: 'Software Engineer (Contract, Part-Time)',
         company: 'Mitsubishi Electric',
         duration: 'Feb 2026 – May 2026',
@@ -44,6 +52,8 @@ const experiences = [
         technologies: ['Python', 'FastAPI', 'React Native', 'PostgreSQL', 'Uber H3', 'Mapbox', 'Valkey (Redis)', 'Stripe'],
     },
     {
+        slug: 'sorcea-labs',
+        summary: 'Built an ingredient-based product recommendation engine serving 3,000+ users in under 100ms.',
         title: 'Software Engineering Intern (Part-Time)',
         company: 'Sorcea Labs — market research platform for skincare',
         duration: 'Jan 2026 – May 2026',
@@ -55,6 +65,8 @@ const experiences = [
         technologies: ['Python', 'Neo4j', 'DynamoDB', 'SageMaker', 'Lambda', 'EventBridge', 'S3'],
     },
     {
+        slug: 'brown-uri-research',
+        summary: 'Built a multi-agent RAG chatbot for PKD patients with 98.3% clinician agreement, published at IEEE AIxMHC.',
         title: 'Undergraduate Researcher',
         company: 'Brown University & University of Rhode Island',
         duration: 'May 2025 – Jan 2026',
@@ -69,6 +81,8 @@ const experiences = [
         link: { label: 'See demo', url: 'https://cysticcare-ai.web.app/' },
     },
     {
+        slug: 'iot-smart-bottle',
+        summary: 'Designed an IoT smart-bottle accessory end to end and presented it at IEEE MIT URTC 2024.',
         title: 'IoT Hardware Research Intern',
         company: 'University of Rhode Island, Biomedical Engineering',
         duration: 'Jun 2024 – Aug 2024',
@@ -80,6 +94,8 @@ const experiences = [
         technologies: ['IoT', 'CAD', '3D Printing', 'Embedded Systems'],
     },
     {
+        slug: 'wearable-health-analytics',
+        summary: 'Built activity-recognition models that detect ADHD patterns from smartwatch sensor data.',
         title: 'Wearable Health Analytics Research Intern',
         company: 'University of Rhode Island, Biomedical Engineering',
         duration: 'Jun 2023 – Aug 2023',
@@ -90,6 +106,8 @@ const experiences = [
         technologies: ['Python', 'Machine Learning', 'K-NN', 'Clustering'],
     },
     {
+        slug: 'clinical-dashboard',
+        summary: 'Built a Flutter dashboard for real-time clinical monitoring with automated patient-data sync.',
         title: 'Clinical Software Research Volunteer',
         company: 'University of Rhode Island, Biomedical Engineering',
         duration: 'Jun 2022 – Aug 2022',
@@ -101,36 +119,39 @@ const experiences = [
     },
 ];
 
+/** Company name without the tagline, e.g. "Grantuity" or "App Dev Club LLC @ UMD". */
+// eslint-disable-next-line react-refresh/only-export-components
+export const shortCompany = (company) => company.split(' — ')[0];
+
 const ExperienceSection = () => {
     return (
         <Section id="experience" title="Experience" keyboard="aside">
-            <div className="relative mx-auto flex w-full max-w-4xl flex-col gap-8 px-4 md:gap-12 md:px-8">
-                <div className="absolute bottom-4 left-1/2 top-4 hidden w-px -translate-x-1/2 bg-border md:block" />
+            <ul className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-4 px-4 md:grid-cols-2 md:px-8">
                 {experiences.map((exp, index) => (
-                    <Reveal key={`${exp.company}-${exp.duration}`} delay={Math.min(index, 3) * 0.05} className="relative">
-                        <Card className="p-6 md:p-8">
-                            <div className="flex flex-col justify-between gap-4 md:flex-row md:items-start">
-                                <div className="space-y-1">
-                                    <h3 className="font-display text-lg font-bold tracking-tight md:text-xl">{exp.title}</h3>
-                                    <p className="text-base font-medium text-muted-foreground">{exp.company}</p>
+                    <Reveal as="li" key={exp.slug} delay={(index % 2) * 0.06} className="flex">
+                        <Link
+                            to={`/experience/${exp.slug}`}
+                            state={{ fromSite: true }}
+                            className="flex w-full rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
+                        >
+                            <Card className="flex w-full flex-col p-5 md:p-6">
+                                <div className="flex items-start justify-between gap-4">
+                                    <div className="min-w-0 space-y-1">
+                                        <h3 className="font-display text-base font-bold leading-snug tracking-tight md:text-lg">
+                                            {exp.title}
+                                        </h3>
+                                        <p className="text-sm font-medium text-muted-foreground">{shortCompany(exp.company)}</p>
+                                    </div>
+                                    <DateTag>{exp.duration}</DateTag>
                                 </div>
-                                <DateTag>{exp.duration}</DateTag>
-                            </div>
-                            <ul className="ml-4 mt-6 list-outside list-disc space-y-2 text-base leading-relaxed text-muted-foreground">
-                                {exp.points.map((point) => (
-                                    <li key={point}>{point}</li>
-                                ))}
-                            </ul>
-                            <TechList items={exp.technologies} className="mt-6" />
-                            {exp.link && (
-                                <div className="mt-6">
-                                    <PillLink href={exp.link.url}>{exp.link.label}</PillLink>
-                                </div>
-                            )}
-                        </Card>
+                                <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">{exp.summary}</p>
+                                <TechList items={exp.technologies} limit={4} className="mt-5" />
+                                <ViewMore label="View details" />
+                            </Card>
+                        </Link>
                     </Reveal>
                 ))}
-            </div>
+            </ul>
         </Section>
     );
 };

@@ -1,6 +1,7 @@
 // Sends one visit ping per browser session (production only).
+// (Named neutrally on purpose: ad blockers like Brave Shields block files named 'track…'.)
 // Visit your site once with ?notrack to stop getting emails for your own views.
-export function trackVisit() {
+export function notifyMe() {
   if (!import.meta.env.PROD) return
   try {
     if (new URLSearchParams(location.search).has('notrack')) localStorage.setItem('noTrack', '1')

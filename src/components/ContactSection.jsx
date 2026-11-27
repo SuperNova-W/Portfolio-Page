@@ -6,7 +6,8 @@ import Section from './Section';
 import { Reveal } from './Reveal';
 import { Card } from './ui';
 
-const contacts = [
+// eslint-disable-next-line react-refresh/only-export-components
+export const contacts = [
     { label: 'Email', text: 'yash.ponnaganti@gmail.com', href: 'mailto:yash.ponnaganti@gmail.com' },
     {
         label: 'LinkedIn',

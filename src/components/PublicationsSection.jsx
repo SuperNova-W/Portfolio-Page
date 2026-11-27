@@ -3,7 +3,8 @@ import Section from './Section';
 import { Reveal } from './Reveal';
 import { Card } from './ui';
 
-const publications = [
+// eslint-disable-next-line react-refresh/only-export-components
+export const publications = [
     {
         title: 'CysticCare: An Evaluation-Driven Retrieval-Augmented Generative AI Chatbot Targeted Towards Evidence-Based Patient Education',
         authors: 'M. Seckin, Y. Ponnaganti, A. Shah, R. Sendag, K. Mankodiya',

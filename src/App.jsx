@@ -5,6 +5,9 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<Home />}></Route>
+      <Route path='/terminal' element={<Home />}></Route>
+      <Route path='/experience/:slug' element={<Home />}></Route>
+      <Route path='/projects/:slug' element={<Home />}></Route>
     </Routes>
   )
 }

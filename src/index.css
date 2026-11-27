@@ -84,6 +84,39 @@
     }
 }
 
+/* Grid background: pinned to the large viewport so mobile URL-bar collapse
+   doesn't resize the WebGL buffer mid-scroll. */
+.grid-canvas {
+    height: 100vh;
+    height: 100lvh;
+}
+
+/* Gradient blobs (ported from anhdtran-portfolio). */
+@keyframes blob {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(20px, -30px) scale(1.1); }
+    50% { transform: translate(-20px, 20px) scale(0.9); }
+    75% { transform: translate(30px, 10px) scale(1.05); }
+}
+.animate-blob {
+    animation: blob 20s infinite ease-in-out;
+    will-change: transform;
+}
+.animate-blob-delay-2 { animation-delay: 2s; }
+.animate-blob-delay-4 { animation-delay: 4s; }
+@media (prefers-reduced-motion: reduce) {
+    .animate-blob { animation: none; }
+}
+
+/* Page peel: the blinking cursor of the terminal printed under the corner. */
+@keyframes peelBlink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+.peel-cursor {
+    animation: peelBlink 1.06s step-end infinite;
+}
+
 /* Preloader: curtain with a curved bottom edge that lifts off the page. */
 .preloader {
     position: fixed;

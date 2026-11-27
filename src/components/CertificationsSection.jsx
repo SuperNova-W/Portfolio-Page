@@ -3,7 +3,8 @@ import Section from './Section';
 import { Reveal } from './Reveal';
 import { Card } from './ui';
 
-const certifications = [
+// eslint-disable-next-line react-refresh/only-export-components
+export const certifications = [
     { title: 'ASME ISHOW Global Accelerator Finalist — NeoTex', issuer: '$10K pre-seed grant' },
     { title: 'AWS Certified Cloud Practitioner', issuer: 'AWS' },
     { title: 'AWS Certified Developer – Associate', issuer: 'AWS' },
@@ -15,7 +16,8 @@ const certifications = [
     { title: '2x IEEE Publications', issuer: 'AIxMHC 2026 · MIT URTC 2026' },
 ];
 
-const hackathons = [
+// eslint-disable-next-line react-refresh/only-export-components
+export const hackathons = [
     '1st — AgentVerse',
     '1st — Ctrl-V',
     '1st — Hackdays Prayagraj',

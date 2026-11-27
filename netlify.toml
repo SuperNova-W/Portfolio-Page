@@ -4,3 +4,20 @@
 
 [functions]
   directory = "netlify/functions"
+
+# Lets /terminal load directly. Kept narrow on purpose: a "/*" catch-all
+# would also swallow the /api/visit function.
+[[redirects]]
+  from = "/terminal"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/experience/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/projects/*"
+  to = "/index.html"
+  status = 200

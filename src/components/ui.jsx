@@ -34,15 +34,35 @@ export const TechBadge = ({ name }) => {
     );
 };
 
-export const TechList = ({ items, className }) => (
-    <p className={cn('flex flex-wrap gap-2', className)}>
-        {items.map((item, index) => (
-            <React.Fragment key={item}>
-                <TechBadge name={item} />
-                {index < items.length - 1 && <span className="sr-only"> / </span>}
-            </React.Fragment>
-        ))}
-    </p>
+/** Tech pills. `limit` shows the first few and a "+N" count for the rest. */
+export const TechList = ({ items, className, limit }) => {
+    const shown = limit ? items.slice(0, limit) : items;
+    const hidden = items.length - shown.length;
+    return (
+        <p className={cn('flex flex-wrap gap-2', className)}>
+            {shown.map((item, index) => (
+                <React.Fragment key={item}>
+                    <TechBadge name={item} />
+                    {index < shown.length - 1 && <span className="sr-only"> / </span>}
+                </React.Fragment>
+            ))}
+            {hidden > 0 && (
+                <span className="inline-flex items-center rounded-md bg-secondary/40 px-2.5 py-0.5 text-xs text-muted-foreground">
+                    +{hidden}
+                </span>
+            )}
+        </p>
+    );
+};
+
+/** "View details →" footer for cards that open a detail panel. */
+export const ViewMore = ({ label = 'View details' }) => (
+    <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors group-hover:text-foreground">
+        {label}
+        <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">
+            →
+        </span>
+    </span>
 );
 
 /** Pill-shaped outbound link with the template's arrow nudge. */
